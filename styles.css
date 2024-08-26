@@ -256,8 +256,7 @@ section .option_list .option.incorrect {
 .total_ques span p:first-child {
   padding-left: 0;
 }
-footer .next-ques,
-.Restart {
+footer .next-ques {
   display: none;
   height: 40px;
   padding: 0 13px;
@@ -287,14 +286,14 @@ footer .next-ques:hover {
   justify-content: space-between;
   text-align: center;
   flex-direction: column;
-  display: none;
+  opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0.9);
 }
 
-.result-container_active {
+.result_container_active {
   z-index: 5;
-  opacity: 100;
+  opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
 }
@@ -337,7 +336,28 @@ footer .next-ques:hover {
   border-radius: 5px;
   border: 1px solid #007bff;
   cursor: pointer;
+  pointer-events: all;
 }
 .quit {
   color: #007bff;
+  pointer-events: all;
+}
+.Restart {
+  height: 40px;
+  padding: 0 13px;
+  font-size: 18px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 5px;
+  border-radius: 1px solid #007bff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quit:hover {
+  background-color: #007bff;
+  color: white;
 }
