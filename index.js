@@ -9,12 +9,19 @@ let total_ques = document.querySelector(".total_ques");
 let option_list = document.querySelector(".option_list");
 let time_sec = document.querySelector(".time_sec");
 let time_line = document.querySelector(".time_line");
+let restart_btn = document.querySelector(".Restart");
+let quit_btn = document.querySelector(".quit");
+let scoreText = document.querySelector(".score-text");
+let restartQuiz = document.querySelector(".Restartzz");
+let quit = document.querySelector(".quit");
 
 let quesindex = 0;
 let footertextindex = 1;
 let counter;
+let counterLine;
 let timeValue = 15;
 let widthValue = 0;
+let userScore = 0;
 
 let tickIcon = `<div class="icon tick">
     <i class="fas fa-check"></i>
@@ -37,6 +44,7 @@ exit_btn.addEventListener("click", function () {
 
 continue_btn.addEventListener("click", function () {
   quiz_container.classList.add("quiz-container_active");
+
   showQuestion(0);
   footertextcounter(1);
   startTimer(timeValue);
@@ -55,7 +63,7 @@ next_ques_btn.addEventListener("click", function () {
     timerLiner(widthValue);
     next_ques_btn.style.display = "none";
   } else {
-    console.log("You are through");
+    showResultContainer();
   }
 });
 
@@ -93,6 +101,8 @@ function answerSelected(answer) {
   let correctAnswer = questions[quesindex].answer;
   let allOption = option_list.children.length;
   if (Userans === correctAnswer) {
+    userScore++;
+    console.log(userScore);
     answer.classList.add("correct");
     answer.insertAdjacentHTML("beforeEnd", tickIcon);
   } else {
@@ -142,3 +152,33 @@ function timerLiner(time) {
     }
   }
 }
+
+function showResultContainer() {
+  quiz_container.classList.remove("quiz-container_active");
+  Information_container.classList.remove("Info_container_active");
+  result_container.classList.add("result_container_active");
+  scoreText.innerHTML = `<span>You got <p>${userScore}</p>Out of<p>${questions.length}</p></span>`;
+}
+
+quit.addEventListener("click", function () {
+  window.location.reload();
+});
+
+restartQuiz.addEventListener("click", function () {
+  let quesindex = 0;
+  let footertextindex = 1;
+  let counter;
+  let timeValue = 15;
+  let widthValue = 0;
+  let userScore = 0;
+
+  showQuestion(quesindex);
+  footertextcounter(footertextindex);
+  clearInterval(counter);
+  startTimer(timeValue);
+  clearInterval(counterLine);
+  timerLiner(widthValue);
+  next_ques_btn.style.display = "none";
+  quiz_container.classList.add("quiz-container_active");
+  result_container.classList.remove("result_container_active");
+});
